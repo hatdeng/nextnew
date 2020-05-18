@@ -1,21 +1,56 @@
 // state hooks // useState useReducer
-import React, { useState, useEffect } from 'react'
+import React, { useState, useReducer, useEffect, useLayoutEffect } from 'react'
 
+function countReducer(state, action) {
+    switch (action.type) {
+        case 'add':
+            return state + 1
+            break;
+        case 'minus':
+            return state -1
+            break;
+        default:
+            return state 
+            break;
+    }
+}
 
 function MyCountFun () {
-    const [count, setCount] = useState(10)  // 
+    //const [count, setCount] = useState(10)  // 
+    const [count, dispatchCount] = useReducer(countReducer, 0)
+    const [name, setName] = useState('jokcy')
+    
     //setCount(c => c + 1)
-    useEffect(()=>{
+    /* useEffect(()=>{
         const interval = setInterval(() => {
             //setCount({count: count + 1})
-            setCount(c => c + 1)
+            //setCount(c => c + 1)
+            dispatchCount({ type: 'add' })
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [])
+    }, []) */
+    // 更新dom之前
+    useLayoutEffect(() => {
+        console.log('effect layout invoked')
+        return () => console.log('effect layout deteched')
+    }, [count])
+    
+    // 更新dom之后
+    useEffect(() => {
+        console.log('effect invoked')
+        return () => console.log('effect deteched')
+    }, [count])
 
     return (
-        <span>{count}</span>
+        <div>
+        <input value={name} onChange={(e) => setName(e.target.value)} name="aaaaaaa" />
+        
+
+        <button onClick={() => dispatchCount({type: 'add'})}>{count}</button>
+
+
+        </div>
     );
 }
 
