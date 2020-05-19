@@ -24,33 +24,27 @@ function MyCountFun () {
     const [name, setName] = useState('jokcy')
 
     const getMyContext = useContext(MyContext)
-    const countRef = useRef() // {current: ''}
-    countRef.current = count
 
     const config = useMemo(() => ({
         text: `Count is ${count}`,
         color: count > 3 ? 'red': 'blue',
     }), [count])
 
-    //const hanldeButtonClick = useCallback(() => dispatchCount({type: 'add'}), [])
+    // const hanldeButtonClick = useCallback(() => dispatchCount({type: 'add'}), [])
     const hanldeButtonClick = useMemo(
-        () => () => dispatchCount({type: 'add'}),
+        () => dispatchCount({type: 'add'}),
         []
     )
-
-    const handleAlterButtonClick = function(){
-        setTimeout(() => {
-            alert(countRef.current)
-        }, 2000)
-    }
     return (
-        <div> 
-            <input value={name} onChange={(e) => setName(e.target.value)} name="aaaaaaa" />
-            <Child config={config} onButtonClick={hanldeButtonClick} />
-            <br />
-            <button onClick={handleAlterButtonClick}> Alert Count</button>
+        <div>
+        <input value={name} onChange={(e) => setName(e.target.value)} name="aaaaaaa" />
+        
+
+        <Child config={config} onButtonClick={hanldeButtonClick} />
+
+
         </div>
-    )
+    );
 }
 
 //function Child({ onButtonClick, config }) {
