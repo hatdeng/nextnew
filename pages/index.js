@@ -1,6 +1,8 @@
 import Head from 'next/head'
+import { connect } from 'react-redux'
+import store from '../redux/store'
 
-export default function Home() {
+const HomeIndex =  ({ counter, username }) => {
   return (
     <div className="container">
       <Head>
@@ -10,7 +12,7 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        {counter} Welcome to <a href="https://nextjs.org">Next.js!</a> {username}
         </h1>
 
         <p className="description">
@@ -207,3 +209,17 @@ export default function Home() {
     </div>
   )
 }
+
+
+export default connect(function mapStateToProps(state) {
+    return {
+      counter: state.count.count,
+      username: state.user.username,
+    }
+  },
+  function mapDispatchToProps (dispatch) {
+    return {
+        add: () => dispatch({type: 'ADD', num})
+    }
+  }
+  )(HomeIndex)

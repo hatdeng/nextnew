@@ -9,7 +9,7 @@
 /* module.exports = withSass({
     //cssModules: true
 }) */
-
+/*
 const withCss = require('@zeit/next-css')
 
 const configs = {
@@ -68,4 +68,4 @@ const configs = {
     publicRuntimeConfig: {
         staticFolder: '/static',
     }
-}
+}*/

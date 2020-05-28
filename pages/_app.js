@@ -1,12 +1,20 @@
 import React from 'react'
 import App from 'next/app'
+import { Provider } from 'react-redux'
 
 import Layout from '../components/Layout'
+
+import MyContext from '../lib/my-context'
 
 import '../public/css/global.scss'
 import 'antd/dist/antd.css'
 
+import store from '../redux/store'
+
 class MyApp extends App {
+  state = {
+    context: 'value'
+  }
   static async getInitialProps({ Component }){
       let pageProps
       if(Component.getInitialProps) {
@@ -20,7 +28,11 @@ class MyApp extends App {
     const { Component, pageProps } = this.props
     return (
       <Layout>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <MyContext.Provider value={this.state.context}>
+            <Component {...pageProps} />
+          </MyContext.Provider>
+        </Provider>
       </Layout>
     )
   }
