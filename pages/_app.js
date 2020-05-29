@@ -11,6 +11,8 @@ import 'antd/dist/antd.css'
 
 import store from '../redux/store'
 
+import testHoc from '../lib/test-hoc'
+
 class MyApp extends App {
   state = {
     context: 'value'
@@ -37,7 +39,7 @@ class MyApp extends App {
     )
   }
 }
-export default MyApp
+export default testHoc(MyApp)
 
 
 /* class MyApp extends App {
