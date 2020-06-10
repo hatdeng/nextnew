@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { connect } from 'react-redux'
-import store from '../redux/store'
+//import store from '../redux/store' 
+import { add } from '../redux/store'
 
 const HomeIndex =  ({ counter, username, rename, add }) => {
   return (
@@ -28,7 +29,12 @@ const HomeIndex =  ({ counter, username, rename, add }) => {
     </div>
   )
 }
-
+HomeIndex.getInitialProps = async({reduxStore }) => {
+    reduxStore.dispatch(add(3))
+    return {
+      
+    }
+}
 export default connect(function mapStateToProps(state) {
     return {
       counter: state.count.count,

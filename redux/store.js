@@ -49,16 +49,10 @@ const allReducers = combineReducers({
     user: userReducer
 })
 
-const store = createStore(
-    allReducers, {
-        count: initialState,
-        user: userInitialState
-    },
-    composeWithDevTools(applyMiddleware(ReduxThunk))
-)
+
 
 // action creatore
-function add(num) {
+export function add(num) {
     return {
         type: ADD,
         num,
@@ -73,7 +67,7 @@ function addAsync (num) {
     }
 }
 //console.log(store)
-
+/* 
 store.dispatch(add(3))
 
 //console.log(store.getState())
@@ -83,6 +77,16 @@ store.subscribe(() => {
 })
 store.dispatch(addAsync(5))
 
-store.dispatch({type: UPDATE_USERNAME, name: 'Harry'})
+store.dispatch({type: UPDATE_USERNAME, name: 'Harry'}) */
 
-export default store
+export default function initializeStore (state) {    
+    const store = createStore (
+        allReducers, 
+        Object.assign({}, {
+            count: initialState,
+            user: userInitialState
+        }, state),
+        composeWithDevTools(applyMiddleware(ReduxThunk)),
+    )
+    return store
+}
