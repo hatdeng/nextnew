@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 
 import Layout from '../components/Layout'
 
+import MyContext from '../lib/my-context'
+
 import '../public/css/global.scss'
 import 'antd/dist/antd.css'
 
@@ -32,7 +34,9 @@ class MyApp extends App {
     return (
       <Layout>
         <Provider store={reduxStore}>
+          <MyContext.Provider value={this.state.context}>
             <Component {...pageProps} />
+          </MyContext.Provider>
         </Provider>
       </Layout>
     )

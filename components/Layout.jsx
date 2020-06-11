@@ -1,15 +1,16 @@
 import Link from  'next/link'
+import { Buttion, Layout } from 'antd';
+
+const { Header, Content, Footer } = Layout
+
 export default ({ children }) => (
-    <>
-    <header>
-        <Link href="/">
-            <a title="HP">Index</a>
-        </Link>
-        <br />
-        <Link href="/test/124">
-            <a title="HP">test</a>
-        </Link>
-    </header>
-    {children}
-    </>
+    <Layout>
+        <header>
+           <span>This is header</span>
+        </header>
+        <Content>    {children}</Content>
+        <Footer>
+            Develop by Harry
+        </Footer>
+    </Layout>
 )
